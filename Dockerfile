@@ -1,4 +1,4 @@
-FROM debian:bookworm
+FROM public.ecr.aws/docker/library/debian:bookworm
 MAINTAINER Adrian Dvergsdal [atmoz.net]
 
 # Steps done in one RUN layer:
@@ -15,6 +15,15 @@ RUN apt-get update && \
 COPY files/sshd_config /etc/ssh/sshd_config
 COPY files/create-sftp-user /usr/local/bin/
 COPY files/entrypoint /
+
+RUN chgrp -R 0 /etc && \
+    chgrp -R 0 /home && \
+    chgrp -R 0 /var/run && \
+    chgrp -R 0 /var/log && \
+    chmod -R g+w /etc && \
+    chmod -R g+w /home && \
+    chmod -R g+w /var/run && \
+    chmod -R g+w /var/log
 
 EXPOSE 22
 
