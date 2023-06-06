@@ -21,7 +21,6 @@ RUN chgrp -R 0 /etc && \
     chgrp -R 0 /var/run && \
     chgrp -R 0 /var/log && \
     chmod -R g+w /etc && \
-    chmod -R g+w /home && \
     chmod -R g+w /var/run && \
     chmod -R g+w /var/log && \
     chmod go-w /run/sshd
